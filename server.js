@@ -3,6 +3,7 @@ import nunjucks from 'nunjucks';
 import session from 'express-session';
 import flash from 'connect-flash';
 import auth from './routes/auth.js';
+import router from './routes/routes.js';
 
 
 const app = express();
@@ -20,7 +21,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(session({
     secret: 'mi-clave',
-    cookie: { maxAge: 100 * 60 * 60 * 24 }
+    cookie: { maxAge: 1000 * 60 * 60 * 24 }
 }));
 
 app.use(flash());
@@ -34,6 +35,7 @@ app.use((req, res, next) => {
 // rutas
 
 app.use(auth);
+app.use(router)
 
 const PORT = 3000;
 

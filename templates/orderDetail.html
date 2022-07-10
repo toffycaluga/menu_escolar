@@ -1,0 +1,21 @@
+{% extends 'layout.html' %}
+{% from 'macros.html' import navbar %}
+{% block navbar %}
+{{ navbar(user)}}
+{% endblock %}
+{% block main %}
+
+<h3>Detalle del pedido {{id_order}} (ordenado el {{order.date}})</h3>
+<div class="border">
+    <p>Menús Vegetarianos :Se ordenaron {{order.vegetarian}},se consumieron {{order.vegetarian_real}}</p>
+    <p>Menús Celiacos :Se ordenaron {{order.celiac}},se consumieron {{order.celiac_real}}</p>
+    <p>Menús Estandar :Se ordenaron {{standart}},se consumieron {{order.standar_real}}</p>
+    <p>Menús Vegetarianos :Se ordenaron {{order.caloric}},se consumieron {{order.caloric_real}}</p>
+    <p>Menús Vegetarianos :Se ordenaron {{order.ethnic}},se consumieron {{order.ethnic_real}}</p>
+    <p>se perdieron en total {{(order.vegetarian - order.vegetarian_real)+(order.celiac -
+        order.celiac_real)+(order.standart - order.standar_real)+(order.caloric - order.caloric_real)+(order.ethnic -
+        order.ethnic_real)}} raciones</p>
+    <a href="/" class="btn btn-primary">Volver a Home</a>
+</div>
+
+{% endblock %}

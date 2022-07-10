@@ -1,0 +1,40 @@
+{% extends 'layout.html' %}
+{% from 'macros.html' import navbar %}
+{% block navbar %}
+{{ navbar(user)}}
+{% endblock %}
+{% block main %}
+<div>
+    <h2>Nuevo Pedido</h2>
+    <div class="row border">
+        <form class="row" method="post" action="/orders/new">
+
+            <div class="col-6">
+                <div class="col">
+                    <input type="text" name="vegetarian" class="form-control" placeholder="M. Vegetarianos ">
+                </div>
+                <div class="col">
+                    <input type="text" name="celiaco" class="form-control" placeholder="M. Celiacos ">
+                </div>
+                <div class="col">
+                    <input type="text" name="estandar" class="form-control" placeholder="M. Estandar">
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="col">
+                    <input type="text" name="caloricos" class="form-control" placeholder="M. Calóricos ">
+                </div>
+                <div class="col">
+                    <input type="text" name="autoctonos" class="form-control" placeholder="M. Autóctonos">
+                </div>
+                <div class="col">
+                    <input type="date" name="fecha" class="form-control" placeholder="M. Autóctonos">
+                </div>
+
+            </div>
+
+    </div>
+    <button class="btn btn-primary mt-2" type="submit">agregar</button>
+    </form>
+
+    {% endblock %}

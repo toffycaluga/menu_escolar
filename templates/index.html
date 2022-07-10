@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% from 'macros.html' import navbar %}
+{% block navbar %}
+{{ navbar(user)}}
+{% endblock %}
+{% block main %}
+<div class="row">
+    <div class="col-8 border">
+        <table class="table table-borderless">
+            <thead>
+                <h3>Pedidos:</h3>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>M1:Menú Vegetariano </td>
+                    <td>M2:Menú Cealiao</td>
+                    <td>M3:Menú Estandar</td>
+                </tr>
+                <tr>
+                    <td>M4:Menú Calórico</td>
+                    <td>M5:Menú Autóctono</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="col-4">
+        <a href="/orders/new" method="get" class="btn btn-success">Nuevo Pedido </a>
+        </divc>
+    </div>
+    <div class="col-12">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Fecha</th>
+                    {%if user.es_admin==true%}<th>Liceo</th>{%endif%}
+                    <th>M1</th>
+                    <th>M2</th>
+                    <th>M3</th>
+                    <th>M4</th>
+                    <th>M5</th>
+                    <th>Acción</th>
+                </tr>
+            </thead>
+            <tbody>
+                {%for order in orders%}
+                <tr
+                    class="{%if order.is_rectified==false%}bg-success{%elif order.is_rectified==true%}bg-warning{%endif%}">
+                    <td>{{ order.date}}</td>
+                    {%if user.es_admin==true%}<td>kl{{order.school_name}}</td>{%endif%}
+                    <td>{{order.vegetarian}}</td>
+                    <td>{{order.celiac}}</td>
+                    <td>{{order.standart}}</td>
+                    <td>{{order.caloric}}</td>
+                    <td>{{order.ethnic}} </td>
+                    <td>
+                        {%if order.is_rectified==false and user.is_admin==false%}
+                        <a href="/orders/{{order.id}}/rectify" class="btn  hidden btn-success">Rectificar</a>
+                        {%elif order.is_rectified==true%}
+                        <a href="/orders/{{order.id}}" class="btn btn-warning">Ver Detalle</a>
+                        {%endif%}
+                    </td>
+                </tr>
+                {%endfor%}
+            </tbody>
+        </table>
+    </div>
+    {% endblock %}
